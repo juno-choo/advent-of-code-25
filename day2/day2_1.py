@@ -1,18 +1,17 @@
 with open("input.txt", "r") as f:
     data = f.read().split(',')
 
-def countInvalid(listOfRanges):
-    invalid = 0
+def addInvalids(listOfRanges):
+    totalInvalids = 0
 
     for eachRange in listOfRanges:
         separated = eachRange.split('-') # ['100', '9999']
-        invalid += checkRepeat(separated[0], separated[1])
-        print(invalid)
-    print(f"Total invalid: {invalid}")
-    return invalid
+        totalInvalids += checkRepeat(separated[0], separated[1])
+        print(f"Cur total: {totalInvalids}")
+    print(f"Total invalids: {totalInvalids}")
 
 def checkRepeat(start, end):
-    invalid = 0 
+    sumOfInvalids = 0
     # Check each num in range
     for i in range(int(start), int(end) + 1):
         num = str(i)
@@ -22,11 +21,11 @@ def checkRepeat(start, end):
             # If firstHalf equals secondHalf of string, it is invalid
             half = n // 2
             if num[0:half] == num[half:]:
-                invalid += 1
-                print(f"1st half: {num[0:half]}, 2nd: {num[half:]}")
-    return invalid 
+                sumOfInvalids += int(num)
+                print(f"{num} is invalid")
+    return sumOfInvalids
 
 test_range = ['10-15', '21-23', '99999-100100', '87-89']
 s = '10'
 e = '23'
-print(countInvalid(test_range))
+print(addInvalids(data))
